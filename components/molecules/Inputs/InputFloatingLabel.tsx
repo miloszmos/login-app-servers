@@ -1,4 +1,5 @@
 import React, {
+  ChangeEvent,
   HTMLInputTypeAttribute,
   InputHTMLAttributes,
   PropsWithChildren,
@@ -9,7 +10,8 @@ import ShowPasswordIcon from '../../atoms/icons/ShowPasswordIcon';
 
 interface InputFloatingLabelProps
   extends InputHTMLAttributes<HTMLInputElement> {
-  onChange: () => void;
+  // eslint-disable-next-line no-unused-vars
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   value: string;
   identity: string;
   type?: HTMLInputTypeAttribute;
