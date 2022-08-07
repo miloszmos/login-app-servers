@@ -1,9 +1,8 @@
 import React from 'react';
+import { useLogout } from '../../hooks/useLogout';
 
 const Header = () => {
-  // TODO ! Add logout functionality
-  const loading = false;
-  const logout = () => {};
+  const { logout, loading } = useLogout();
   return (
     <div className="h-20 bg-neutral-800 shadow-md md:shadow-xl w-full flex items-center">
       <div className="container mx-auto flex justify-between px-6">
