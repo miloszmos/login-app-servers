@@ -1,11 +1,12 @@
 import cookie from 'cookie';
 import Head from 'next/head';
 import type { GetServerSideProps } from 'next';
-import React, { SyntheticEvent } from 'react';
+import React, { ReactElement, SyntheticEvent } from 'react';
 import { useLogin, UserLogin } from '../hooks/useLogin';
 import LoginIcon from '../components/atoms/icons/LoginIcon';
 import InputFloatingLabel from '../components/molecules/Inputs/InputFloatingLabel';
 import useForm from '../hooks/useForm';
+import FooterLayout from '../components/layouts/FooterLayout';
 
 const initialValues: UserLogin = {
   username: '',
@@ -96,6 +97,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   return {
     props: {},
   };
+};
+
+LoginPage.getLayout = function getLayout(page: ReactElement) {
+  return <FooterLayout>{page}</FooterLayout>;
 };
 
 export default LoginPage;
