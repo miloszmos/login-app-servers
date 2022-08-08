@@ -21,7 +21,7 @@ const FourOFourPage = () => {
           <button
             onClick={handleGoHomePage}
             type="button"
-            className="text-zinc-900 hover:underline hover:text-zinc-900 focus:outline-none font-medium text-sm p-2.5 text-center inline-flex items-center"
+            className="text-sky-600 hover:underline hover:text-sky-700 focus:outline-none font-medium text-sm p-2.5 text-center inline-flex items-center"
           >
             <span>&larr; Back To Home Page</span>
           </button>

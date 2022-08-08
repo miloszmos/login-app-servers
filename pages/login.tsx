@@ -68,7 +68,7 @@ const LoginPage = () => {
                 <button
                   disabled={loading}
                   type="submit"
-                  className="inline-block px-7 py-3 bg-zinc-900 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-zinc-800 hover:shadow-lg focus:bg-zinc-800  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-zinc-800 active:shadow-lg transition duration-500 disabled:cursor-wait disabled:opacity-70 ease-in-out w-full"
+                  className="inline-block px-7 py-3 bg-sky-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-700 active:shadow-lg transition duration-500 disabled:cursor-wait disabled:opacity-70 ease-in-out w-full"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
                 >
