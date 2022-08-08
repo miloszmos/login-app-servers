@@ -1,85 +1,53 @@
 import { useEffect, useState } from 'react';
 import { ServerType } from '../types/server';
 
-type SortedServers = {
-  data: ServerType[];
-  type: 'name' | 'distance';
-};
+type SortType = 'name' | 'distance' | '';
 
-export default function useServersSort(servers: ServerType[]) {
-  const [location, setLocation] = useState<string>('');
-  const [sorted, setSorted] = useState<SortedServers | null>();
+export default function useServersSort(
+  serversData: ServerType[],
+  // eslint-disable-next-line no-unused-vars
+  setServersData: (state: ServerType[]) => void,
+  resetProp?: string
+) {
+  const [sortType, setSortType] = useState<SortType>('');
 
   useEffect(() => {
-    if (!location) {
-      return setSorted({
-        type: 'name',
-        data: servers.sort((a, b) => a.name.localeCompare(b.name)),
-      });
-    }
-    const data = servers.filter((s) => s.name.includes(location));
-    if (sorted) {
-      return setSorted({
-        ...sorted,
-        data,
-      });
-    }
-    setSorted({
-      type: 'name',
-      data: data.sort((a, b) => a.name.localeCompare(b.name)),
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
+    setSortType('');
+  }, [resetProp]);
 
   const handleServerNameSort = () => {
-    if (sorted?.type === 'name') {
-      const data = [...sorted.data.reverse()];
-      return setSorted({
-        ...sorted,
-        data,
+    const padName = (name: string) => {
+      const sName = name.split('#');
+      sName[1] = String(sName[1]).padStart(4, '0');
+      return sName.join('#');
+    };
+
+    if (sortType === 'name') {
+      const reversedServers = [...serversData.reverse()];
+      setServersData(reversedServers);
+    } else {
+      setSortType('name');
+      const sortedServers = serversData.sort((a, b) => {
+        const aName = padName(a.name);
+        const bName = padName(b.name);
+        return aName.localeCompare(bName);
       });
+      setServersData(sortedServers);
     }
-    if (sorted?.type === 'distance') {
-      const data = sorted.data.sort((a, b) => a.name.localeCompare(b.name));
-      return setSorted({
-        type: 'name',
-        data,
-      });
-    }
-    setSorted({
-      type: 'name',
-      data: servers.sort((a, b) => a.name.localeCompare(b.name)),
-    });
   };
 
   const handleDistanceSort = () => {
-    if (sorted?.type === 'name') {
-      const data = sorted.data.sort((a, b) => a.distance - b.distance);
-      return setSorted({
-        type: 'distance',
-        data,
-      });
+    if (sortType === 'distance') {
+      const reversedServers = [...serversData.reverse()];
+      setServersData(reversedServers);
+    } else {
+      setSortType('distance');
+      const sortedServers = serversData.sort((a, b) => a.distance - b.distance);
+      setServersData(sortedServers);
     }
-    if (sorted?.type === 'distance') {
-      const data = [...sorted.data.reverse()];
-      return setSorted({
-        ...sorted,
-        data,
-      });
-    }
-    setSorted({
-      type: 'distance',
-      data: servers.sort((a, b) => a.distance - b.distance),
-    });
   };
 
-  const handleSelectLocation = (loc: string) =>
-    location === loc ? setLocation('') : setLocation(loc);
-
   return {
-    sorted,
-    location,
-    handleSelectLocation,
     handleServerNameSort,
     handleDistanceSort,
   };

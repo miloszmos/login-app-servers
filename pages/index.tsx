@@ -5,10 +5,11 @@ import Table from '../components/molecules/Table/Table';
 import ButtonSort from '../components/atoms/buttons/ButtonSort';
 import TableHead from '../components/molecules/Table/TableHead';
 import useServersSort from '../hooks/useServersSort';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import BaseLayout from '../components/layouts/BaseLayout';
 import { getServersLocations } from '../utils/getServersLocations';
 import { ServerType } from '../types/server';
+import useLocationFilter from '../hooks/useServersFilter';
 
 const API_ENDPOINT = 'https://playground.tesonet.lt/v1';
 
@@ -19,13 +20,22 @@ interface HomePageProps {
 }
 
 const HomePage = ({ servers, serversLocations }: HomePageProps) => {
-  const {
-    sorted,
-    location,
-    handleDistanceSort,
-    handleSelectLocation,
-    handleServerNameSort,
-  } = useServersSort(servers);
+  const [serversData, setServersData] = useState<ServerType[]>([]);
+  useEffect(() => {
+    setServersData(servers);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [servers]);
+
+  const { location, handleSelectLocation } = useLocationFilter(
+    servers,
+    setServersData
+  );
+
+  const { handleServerNameSort, handleDistanceSort } = useServersSort(
+    serversData,
+    setServersData,
+    location
+  );
 
   return (
     <>
@@ -42,7 +52,7 @@ const HomePage = ({ servers, serversLocations }: HomePageProps) => {
         <div className="flex flex-col mt-5 sm:mt-0 sm:ml-5 md:ml-10">
           <div className="overflow-x-auto relative shadow-md rounded-lg">
             <ServersTabable
-              data={sorted?.data || servers}
+              data={serversData}
               handleDistanceSort={handleDistanceSort}
               handleServerNameSort={handleServerNameSort}
             />
