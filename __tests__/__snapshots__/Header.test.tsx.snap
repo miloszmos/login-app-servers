@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> renders and matches the snapshot 1`] = `
+<div>
+  <div
+    class="h-20 bg-neutral-800 shadow-md md:shadow-xl w-full flex items-center"
+  >
+    <div
+      class="container mx-auto flex justify-between px-6"
+    >
+      <p
+        class="text-3xl text-slate-200"
+      >
+        _Servers
+      </p>
+      <button
+        aria-disabled="false"
+        aria-label="logout"
+        class="text-slate-200 font-semibold underline decoration-transparent underline-offset-1 transition ease-in-out hover:decoration-white duration-300"
+        type="button"
+      >
+        Logout →
+      </button>
+    </div>
+  </div>
+</div>
+`;
