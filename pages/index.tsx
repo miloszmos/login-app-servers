@@ -50,7 +50,7 @@ const HomePage = ({ servers, serversLocations }: HomePageProps) => {
           </div>
         </div>
         <div className="flex flex-col mt-5 sm:mt-0 sm:ml-5 md:ml-10">
-          <div className="overflow-x-auto relative shadow-md rounded-lg">
+          <div className="overflow-x-auto relative shadow-md rounded-lg overflow-y-scroll sm:h-[75vh]">
             <ServersTabable
               data={serversData}
               handleDistanceSort={handleDistanceSort}
