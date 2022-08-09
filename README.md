@@ -2,6 +2,12 @@
 
 React + TypeScript login app using playground.tesonet API.
 
+#### Testing user credentials
+
+```
+{"username": "tesonet", "password": "partyanimal"}
+```
+
 Run the development server:
 
 ```bash
