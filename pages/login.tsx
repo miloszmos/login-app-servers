@@ -52,6 +52,7 @@ const LoginPage = () => {
                 Username
               </InputFloatingLabel>
               <InputFloatingLabel
+                required
                 type="password"
                 identity="password"
                 onChange={handleChange}
